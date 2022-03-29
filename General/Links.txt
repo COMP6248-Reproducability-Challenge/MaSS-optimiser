@@ -1,0 +1,10 @@
+OpenReview: https://openreview.net/forum?id=r1gixp4FPH
+
+Papers with code: https://paperswithcode.com/paper/accelerating-stochastic-training-for-over
+
+Code: https://github.com/ts66395/MaSS
+
+Previous Attempts:
+https://github.com/COMP6248-Reproducability-Challenge/COMP6248-Reproducibility-Challenge-MaSS-Optimiser/blob/main/MaSS%20Optimiser%20Reproducibility%20Report.pdf
+
+https://github.com/COMP6248-Reproducability-Challenge/MaSS
