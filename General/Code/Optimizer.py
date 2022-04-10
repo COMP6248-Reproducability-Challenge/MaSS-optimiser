@@ -8,9 +8,9 @@ class MaSS(Optimizer):
         if lr and lr < 0.0:
             raise ValueError("Invalid learning rate: {}".format(lr))
         if alpha < 0.0:
-            raise ValueError("Invalid momentum value: {}".format(alpha))
+            raise ValueError("Invalid alpha value: {}".format(alpha))
         if kappa_t < 0.0:
-            raise ValueError("Invalid weight_decay value: {}".format(kappa_t))
+            raise ValueError("Invalid kappa_t value: {}".format(kappa_t))
 
         defaults = dict(lr=lr, alpha=alpha, kappa_t=kappa_t)
 
