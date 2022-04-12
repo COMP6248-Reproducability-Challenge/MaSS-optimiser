@@ -51,7 +51,7 @@ class MaSS(Optimizer):
                 w_t = w_list[i]
 
                 w_t1 = param - lr*d_p
-                param.data = (1 + gamma)*w_t1 - gamma*w_t - lr2*d_p
+                param.data = (1 + gamma)*w_t1.detach() - gamma*w_t - lr2*d_p
 
                 w_list[i] = w_t1
 
