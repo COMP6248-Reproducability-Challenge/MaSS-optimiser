@@ -30,23 +30,32 @@ class MaSS(Optimizer):
 
         for group in self.param_groups:
             params_with_grad = []
+            w_list = []
             d_p_list = []
-            momentum_buffer_list = []
-            has_sparse_grad = False
+            lr = group['lr']
+            alpha = group['alpha']
+            kappa_t = group['kappa_t']
+            delta = lr / alpha / kappa_t
+            gamma = (1 - alpha)/(1 + alpha)
+            lr2 = (lr - alpha * delta)/(1 + alpha)
 
             for p in group['params']:
-                if p.grad is not None:
-                    params_with_grad.append(p)
-                    d_p_list.append(p.grad)
-                    if p.grad.is_sparse:
-                        has_sparse_grad = True
-
-                    state = self.state[p]
-                    if 'momentum_buffer' not in state:
-                        momentum_buffer_list.append(None)
-                    else:
-                        momentum_buffer_list.append(state['momentum_buffer'])
+                params_with_grad.append(p)
+                w_list.append(p)
+                #v_list.append(p)
+                d_p_list.append(p.grad)
+                state = self.state[p]
 
             for i, param in enumerate(params_with_grad):
                 d_p = d_p_list[i]
+                w_t = w_list[i]
 
+                w_t1 = param - lr*d_p
+                param.data = (1 + gamma)*w_t1 - gamma*w_t - lr2*d_p
+
+                w_list[i] = w_t1
+
+            for p in params_with_grad:
+                state = self.state[p]
+
+        return loss
